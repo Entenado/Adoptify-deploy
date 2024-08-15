@@ -1,0 +1,203 @@
+@import "../../../styles.scss";
+
+swiper-slide {
+	position: relative;
+	height: 60vh;
+}
+
+swiper-slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top;
+}
+
+swiper-slide::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 5;
+}
+
+swiper-slide div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+	z-index: 10;
+	& h3 {
+		color: map-get($map: $text-palette, $key: contrast);
+
+		@media (width >= 992px) {
+			font-size: 3.2rem;
+		}
+	}
+
+	& p {
+		color: map-get($map: $text-palette, $key: contrast);
+
+		@media (width >= 992px) {
+			font-size: 1.8rem;
+		}
+	}
+}
+
+swiper-container::part(bullet-active) {
+	background: map-get($map: $primary-palette, $key: 300) !important;
+}
+
+mat-card.pet-card {
+	background-color: map-get($map: $neutral-palette, $key: 300);
+}
+
+img[mat-card-image].pet-img {
+	width: 200px;
+	height: 200px;
+	border: none;
+	border-radius: 12px 0 0 12px;
+	object-fit: cover;
+	object-position: top;
+
+	@media (width >= 768px) {
+		width: 100%;
+
+		border-radius: 12px 12px 0 0;
+	}
+}
+
+@media (width >= 768px) {
+	.div-pet-img {
+		width: 100%;
+	}
+}
+
+div h3 {
+	font-size: map-get($map: $font-size, $key: body1);
+}
+
+div h4 {
+	font-size: map-get($map: $font-size, $key: body2);
+}
+
+.icon-arrow {
+	position: relative;
+	background-color: map-get($map: $primary-palette, $key: 300);
+	border-radius: 100%;
+	width: 70px;
+	height: 70px;
+}
+
+.icon-arrow * {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: map-get($map: $text-palette, $key: contrast);
+}
+
+.icon-arrow *::before {
+	font-size: 3rem;
+}
+
+.about-us-photo {
+	@media (width >= 768px) {
+		width: 50%;
+	}
+}
+
+video {
+	border-radius: 12px;
+}
+
+@keyframes slides {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+.logos {
+	overflow: hidden;
+	padding: 30px 0px;
+	white-space: nowrap;
+	position: relative;
+}
+
+.logos:before,
+.logos:after {
+	position: absolute;
+	top: 0;
+	content: "";
+	width: 250px;
+	height: 100%;
+	z-index: 2;
+}
+
+.logos:before {
+	left: 0;
+	background: linear-gradient(
+		to left,
+		rgba(255, 255, 255, 0),
+		map-get($map: $neutral-palette, $key: 50)
+	);
+}
+
+.logos:after {
+	right: 0;
+	background: linear-gradient(
+		to right,
+		rgba(255, 255, 255, 0),
+		map-get($map: $neutral-palette, $key: 50)
+	);
+}
+
+.logo_items {
+	display: inline-block;
+	animation: 35s slides infinite linear;
+}
+
+.logos:hover .logo_items {
+	animation-play-state: paused;
+}
+
+.logo_items img {
+	height: 200px;
+	margin-right: 50px;
+}
+
+.container-card-team-member mat-card {
+	border: none !important;
+}
+
+.join-us-photo:nth-child(1) {
+	width: 150px;
+}
+
+.card-team_member-photo {
+	width: 100%;
+	object-fit: cover;
+	aspect-ratio: 1/1;
+
+	@media (width >= 992px) {
+		width: 50%;
+	}
+}
+
+.card-team_member-name {
+	font-size: 1rem;
+	text-wrap: balance;
+}
+
+.card-team_member-position {
+	font-size: 0.8rem;
+	text-wrap: balance;
+}

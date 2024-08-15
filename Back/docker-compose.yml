@@ -1,0 +1,178 @@
+version: '2.1'
+
+services:
+  eureka-sv:
+    build: eureka-sv
+    mem_limit: 512m
+    ports:
+      - "8761:8761"
+    networks:
+      - adoptify-network
+
+  gestionmascotas:
+    build: gestionmascotas
+    mem_limit: 512m
+    ports:
+      - "7070:7070"
+    environment:
+      DB_URL: jdbc:mysql://adoptapp_gestionmascota:3306/adoptapp_gestionmascota?createDatabaseifNotExist=true&serverTimezone=UTC
+      DB_USERNAME: root
+      DB_PASSWORD: password
+    restart: always
+    depends_on:
+      adoptapp_gestionmascota:
+          condition: service_healthy
+    networks:
+      - adoptify-network
+  adoptapp_gestionmascota:
+      image: mysql:8.0.33
+      ports:
+          - "3307:3306"
+      environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: adoptapp_gestionmascota
+      restart: always
+      healthcheck:
+          test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+          timeout: 10s
+          retries: 10
+      networks:
+          - adoptify-network
+
+  auth-service:
+      build: auth-service
+      mem_limit: 512m
+      ports:
+          - "7071:7071"
+      environment:
+          DB_URL: jdbc:mysql://adoptapp_auth_db:3306/adoptapp_auth_db?createDatabaseifNotExist=true&serverTimezone=UTC
+          DB_USERNAME: root
+          DB_PASSWORD: password
+      restart: always
+      depends_on:
+        adoptapp_auth_db:
+              condition: service_healthy
+      networks:
+         - adoptify-network
+  adoptapp_auth_db:
+      image: mysql:8.0.33
+      ports:
+          - "3308:3306"
+      environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: adoptapp_auth_db
+      restart: always
+      healthcheck:
+          test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+          timeout: 10s
+          retries: 10
+      networks:
+          - adoptify-network
+
+  adoptante-service:
+      build: adoptante-service
+      mem_limit: 512m
+      ports:
+          - "7073:7073"
+      environment:
+          DB_URL: jdbc:mysql://adoptapp_adoptante_db:3306/adoptapp_adoptante_db?createDatabaseifNotExist=true&serverTimezone=UTC
+          DB_USERNAME: root
+          DB_PASSWORD: password
+      restart: always
+      depends_on:
+          adoptapp_adoptante_db:
+              condition: service_healthy
+      networks:
+          - adoptify-network
+  adoptapp_adoptante_db:
+      image: mysql:8.0.33
+      ports:
+          - "3309:3306"
+      environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: adoptapp_adoptante_db
+      restart: always
+      healthcheck:
+          test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+          timeout: 10s
+          retries: 10
+      networks:
+          - adoptify-network
+
+  protectora-service:
+      build: protectora-service
+      mem_limit: 512m
+      ports:
+          - "7075:7075"
+      environment:
+          DB_URL: jdbc:mysql://adoptapp_protectora-service:3306/adoptapp_protectora-service?createDatabaseifNotExist=true&serverTimezone=UTC
+          DB_USERNAME: root
+          DB_PASSWORD: password
+      restart: always
+      depends_on:
+          adoptapp_protectora-service:
+              condition: service_healthy
+      networks:
+          - adoptify-network
+  adoptapp_protectora-service:
+      image: mysql:8.0.33
+      ports:
+          - "3311:3306"
+      environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: adoptapp_protectora-service
+      restart: always
+      healthcheck:
+          test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+          timeout: 10s
+          retries: 10
+      networks:
+          - adoptify-network
+
+  contactanos:
+      build: contactanos
+      mem_limit: 512m
+      ports:
+          - "7074:7074"
+      environment:
+          DB_URL: jdbc:mysql://adoptapp_contactame:3306/adoptapp_contactame?createDatabaseifNotExist=true&serverTimezone=UTC
+          DB_USERNAME: root
+          DB_PASSWORD: password
+      restart: always
+      depends_on:
+          adoptapp_contactame:
+              condition: service_healthy
+      networks:
+          - adoptify-network
+  adoptapp_contactame:
+      image: mysql:8.0.33
+      ports:
+          - "3312:3306"
+      environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: adoptapp_contactame
+      restart: always
+      healthcheck:
+          test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+          timeout: 10s
+          retries: 10
+      networks:
+          - adoptify-network
+
+  api-gateway:
+      build: api-gateway
+      mem_limit: 512m
+      ports:
+          - "7076:7076"
+      networks:
+          - adoptify-network
+
+
+networks:
+   adoptify-network:
+

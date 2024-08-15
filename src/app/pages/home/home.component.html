@@ -1,0 +1,314 @@
+<swiper-container class="mb-5" autoplay pagination loop>
+	<swiper-slide>
+		<img src="/assets/home/slider/slider-1.webp" />
+		<div
+			class="d-flex flex-column align-items-center align-items-md-start gap-2 text-white text-center text-md-start"
+		>
+			<h3 class="user-select-none fw-bold">Adopción de mascotas</h3>
+			<p>
+				Encuentra perros y gatos en busca de un hogar amoroso con
+				perfiles detallados y filtros para facilitar la búsqueda del
+				compañero ideal.
+			</p>
+			<a mat-flat-button routerLink="/gallery">Explorar</a>
+		</div>
+	</swiper-slide>
+	<swiper-slide>
+		<img src="/assets/home/slider/slider-2.webp" />
+		<div
+			class="d-flex flex-column align-items-center align-items-md-end gap-2 text-white text-center text-md-end"
+		>
+			<h3 class="user-select-none fw-bold">Donaciones</h3>
+			<p>
+				Apoya a los albergues y organizaciones de rescate de animales
+				con donaciones monetarias o en especie.
+			</p>
+			<a mat-flat-button routerLink="/donate">Descubre cómo</a>
+		</div>
+	</swiper-slide>
+	<swiper-slide>
+		<img src="/assets/home/slider/slider-3.webp" />
+		<div
+			class="d-flex flex-column align-items-center align-items-md-start gap-2 text-white text-center text-md-start"
+		>
+			<h3 class="user-select-none fw-bold">Entidades de refugio</h3>
+			<p>
+				Encuentra albergues y organizaciones de rescate de animales
+				cercanos a ti.
+			</p>
+			<a mat-flat-button routerLink="/gallery">Explorar</a>
+		</div>
+	</swiper-slide>
+	<swiper-slide>
+		<img src="/assets/home/slider/slider-4.webp" />
+		<div
+			class="d-flex flex-column align-items-center align-items-md-start gap-2 text-white text-center text-md-start"
+		>
+			<h3 class="user-select-none fw-bold">
+				Alojamientos y nuevas asociaciones
+			</h3>
+			<p>
+				Registra tu albergue o asociación de rescate de animales para
+				que más personas puedan encontrar y apoyar tu causa.
+			</p>
+			<a mat-flat-button routerLink="/contact">Explorar</a>
+		</div>
+	</swiper-slide>
+</swiper-container>
+<div class="container">
+	<section class="d-flex flex-column">
+		<span class="subtitle-red">Nuevos amigos</span>
+		<h2 class="fw-bold">En adopción actualmente</h2>
+		<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 mb-3">
+			@for (pet of recentPets; track pet.id) {
+			<div class="col">
+				<mat-card appearance="outlined" class="pet-card border-0">
+					<mat-card-content
+						class="d-flex flex-row align-items-start p-0 flex-md-column"
+					>
+						<div class="div-pet-img">
+							<img
+								mat-card-image
+								src="{{ pet.img }}"
+								alt="{{ pet.nombre }}"
+								class="pet-img ratio-1x1"
+							/>
+						</div>
+						<div
+							class="d-flex flex-column px-4 align-items-start p-3 w-100"
+						>
+							<div
+								class="d-flex flex-column flex-md-row justify-content-md-between w-100"
+							>
+								<div>
+									<h3 class="fw-bold">
+										{{ pet.nombre }}
+									</h3>
+									<h4>{{ pet.sexo }}</h4>
+								</div>
+								<a
+									mat-stroked-button
+									[routerLink]="[
+										'/shelter',
+										pet.protectoraId,
+										'pet',
+										pet.id
+									]"
+									>Ver perfil</a
+								>
+							</div>
+						</div>
+					</mat-card-content>
+				</mat-card>
+			</div>
+			}
+			<mat-card appearance="outlined" class="text-center">
+				<a
+					mat-stroked-button
+					routerLink="/gallery"
+					class="view-more-button col flex-grow-1 w-100 border-0"
+				>
+					<div
+						class="d-flex flex-column align-items-center gap-3 p-4 p-md-0"
+					>
+						<span class="fw-bold">
+							Quiero ver todos los animales
+						</span>
+						<div class="rounded-circle icon-arrow">
+							<mat-icon fontIcon="arrow_right" />
+						</div>
+					</div>
+				</a>
+			</mat-card>
+		</div>
+	</section>
+
+	<section class="d-flex flex-column flex-md-row align-items-md-center gap-3">
+		<img
+			src="/assets/home/about/about.webp"
+			alt="sobre nosotros"
+			class="about-us-photo"
+		/>
+		<div class="d-flex flex-column">
+			<span class="subtitle-red">Conócenos</span>
+			<h2 class="fw-bold">Sobre nosotros</h2>
+			<p>
+				En Adoptify, conectamos refugios de perros y gatos con
+				adoptantes amorosos, facilitando el proceso de adopción.
+				Colaboramos con albergues, voluntarios y donantes para ofrecer
+				un mejor futuro a los animales.
+			</p>
+			<mat-card-actions class="p-0">
+				<a mat-flat-button routerLink="/about" class="align-self-end"
+					>Ver más</a
+				>
+			</mat-card-actions>
+		</div>
+	</section>
+
+	<section>
+		<span class="subtitle-red">Nuevos amigos</span>
+		<h2 class="fw-bold">Historias de adopción</h2>
+		<div class="row row-cols-1 row-cols-sm-2 g-4 mb-3">
+			<div class="col">
+				<div>
+					<video
+						class="w-100"
+						src="/assets/home/stories/ADOPTIFY GATO AUDIO MUSICA.mp4"
+						controls
+					></video>
+				</div>
+			</div>
+			<div class="col">
+				<div>
+					<video
+						src="/assets/home/stories/ADOPTIFY PERRO AUDIO MUSICA.mp4"
+						class="w-100"
+						controls
+					></video>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<app-section-title text="Nuestros patrocinadores" />
+		<div class="logos">
+			<div class="logo_items">
+				<img src="/assets/home/sponsors/sponsor-1.webp" />
+				<img src="/assets/home/sponsors/sponsor-2.webp" />
+				<img src="/assets/home/sponsors/sponsor-3.webp" />
+				<img src="/assets/home/sponsors/sponsor-1.webp" />
+				<img src="/assets/home/sponsors/sponsor-2.webp" />
+				<img src="/assets/home/sponsors/sponsor-3.webp" />
+				<img src="/assets/home/sponsors/sponsor-1.webp" />
+				<img src="/assets/home/sponsors/sponsor-2.webp" />
+				<img src="/assets/home/sponsors/sponsor-3.webp" />
+				<img src="/assets/home/sponsors/sponsor-1.webp" />
+				<img src="/assets/home/sponsors/sponsor-2.webp" />
+				<img src="/assets/home/sponsors/sponsor-3.webp" />
+			</div>
+			<div class="logo_items">
+				<img src="/assets/home/sponsors/sponsor-1.webp" />
+				<img src="/assets/home/sponsors/sponsor-2.webp" />
+				<img src="/assets/home/sponsors/sponsor-3.webp" />
+				<img src="/assets/home/sponsors/sponsor-1.webp" />
+				<img src="/assets/home/sponsors/sponsor-2.webp" />
+				<img src="/assets/home/sponsors/sponsor-3.webp" />
+				<img src="/assets/home/sponsors/sponsor-1.webp" />
+				<img src="/assets/home/sponsors/sponsor-2.webp" />
+				<img src="/assets/home/sponsors/sponsor-3.webp" />
+				<img src="/assets/home/sponsors/sponsor-1.webp" />
+				<img src="/assets/home/sponsors/sponsor-2.webp" />
+				<img src="/assets/home/sponsors/sponsor-3.webp" />
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<h3 class="subtitle-red text-sm-center">Participa y contribuye</h3>
+		<h2 class="fw-bold text-sm-center">
+			Todo lo que necesitas saber para unirte y apoyar nuestra misión
+		</h2>
+		<div class="row row-cols-md-3 row-gap-xl-5 h-100">
+			<div class="col d-flex flex-column align-items-center">
+				<div
+					class="w-100 flex-grow-1 mb-3 d-flex justify-content-center align-items-center"
+				>
+					<img
+						src="/assets/home/join/join-1.webp"
+						alt="join-us-2"
+						class="join-us-photo d-none d-md-flex"
+					/>
+				</div>
+				<div>
+					<span class="fw-bold"> ¿Cómo inscribo mi albergue? </span>
+					<p>
+						Inscriba su albergue fácilmente y únase a nuestra red
+						para encontrar hogares amorosos para sus animales.
+					</p>
+					<a mat-flat-button routerLink="/auth/register"
+						>Registrarse</a
+					>
+				</div>
+			</div>
+			<div
+				class="col d-flex flex-column flex-md-column-reverse text-sm-end text-md-start"
+			>
+				<img
+					src="/assets/home/join/join-2.webp"
+					alt="join-us-2"
+					class="join-us-photo d-none d-md-flex flex-grow w-100"
+				/>
+				<div class="flex-grow-1">
+					<span class="fw-bold"> ¿Cómo se sostiene? </span>
+					<p>
+						Descubra cómo mantenemos nuestra plataforma gracias a
+						los patrocinadores y donaciones.
+					</p>
+					<a mat-flat-button routerLink="/about">Ver más</a>
+				</div>
+			</div>
+			<div class="col d-flex flex-column text-md-end align-items-end">
+				<img
+					src="/assets/home/join/join-3.webp"
+					alt="join-us-3"
+					class="join-us-photo mb-3 flex-grow-1 w-100"
+				/>
+				<div class="flex-grow-1">
+					<span class="fw-bold"> ¿Cómo donar? </span>
+					<p>
+						Ayude a los refugios de animales con su donación. Su
+						apoyo marca la diferencia.
+					</p>
+					<a mat-flat-button routerLink="/donate">Ver más</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<h3 class="subtitle-red text-sm-center">Nuestro equipo</h3>
+		<h2 class="text-sm-center">El equipo que hace la diferencia</h2>
+		<div class="row row-cols-2 row-cols-sm-4 g-3 mb-3">
+			@for (teamMember of teamMembers; track teamMember) {
+			<div class="col container-card-team-member">
+				<mat-card
+					appearance="outlined"
+					class="h-100 d-flex flex-column align-items-center py-3"
+				>
+					<img
+						mat-card-image
+						[src]="teamMember.photo"
+						[alt]="teamMember.name"
+						class="card-team_member-photo rounded-circle"
+					/>
+					<div
+						class="d-flex flex-column align-items-center gap-2 p-2 h-100"
+					>
+						<mat-card-content
+							class="d-flex flex-column text-center flex-grow-1 h-100 p-0"
+						>
+							<span
+								class="card-team_member-name fw-bold flex-grow-1 text-center"
+								>{{ teamMember.name }}</span
+							>
+							<span class="card-team_member-position">{{
+								teamMember.position
+							}}</span>
+						</mat-card-content>
+						<mat-card-actions>
+							<a
+								mat-stroked-button
+								href="{{ teamMember.linkedIn }}"
+								target="_blank"
+								>LinkedIn</a
+							>
+						</mat-card-actions>
+					</div>
+				</mat-card>
+			</div>
+			}
+		</div>
+	</section>
+</div>

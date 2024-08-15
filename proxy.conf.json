@@ -1,0 +1,11 @@
+{
+	"/api/*": {
+		"target": "http://vps-4301105-x.dattaweb.com",
+		"secure": false,
+		"logLevel": "debug",
+		"pathRewrite": {
+			"^/api": "",
+			"changeOrigin": true
+		}
+	}
+}

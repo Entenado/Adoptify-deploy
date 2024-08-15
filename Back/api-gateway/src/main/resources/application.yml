@@ -1,0 +1,54 @@
+server:
+  port: 7076
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: ADOPTANTE-SERVICE
+          uri: lb://ADOPTANTE-SERVICE
+          predicates:
+            - Path=/adoptante/**
+
+
+        - id: AUTH-SERVICE
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+
+        - id: PROTECTORA-SERVICE
+          uri: lb://PROTECTORA-SERVICE
+          predicates:
+            - Path=/protectora/**
+
+        - id: GESTIONMASCOTAS
+          uri: lb://GESTIONMASCOTAS
+          predicates:
+            - Path=/mascota/**
+
+        - id: CONTACTANOS
+          uri: lb://CONTACTANOS
+          predicates:
+            - Path=/email/**
+
+
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://vps-4301105-x.dattaweb.com:8761
+
+excluded-paths:
+  paths:
+    - /auth/login
+    - /auth/register/adoptante
+    - /auth/register/protectora
